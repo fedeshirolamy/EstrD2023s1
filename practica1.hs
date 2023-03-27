@@ -23,7 +23,7 @@ divisionYResto n m = (div n m, mod n m)
 -- Dado un par de números devuelve el mayor de estos
 maxDelPar :: (Int, Int) -> Int
 maxDelPar (n, m) =
-  if (n > m)
+  if n > m
     then n
     else m
 
@@ -137,8 +137,8 @@ esMayorQueLaOtra (P n e d) (P m f r) = e>f
 
 laQueEsMayor :: Persona -> Persona -> Persona
 laQueEsMayor (P n e d) (P m r f) = if(e>r)
-    then (P n e d)
-    else (P m r f)
+    then P n e d
+    else P m r f
 
 
 --4--2
@@ -160,9 +160,63 @@ superaA (K Fuego _) (K Planta _) = True
 superaA (K Planta _) (K Agua _) = True
 superaA (K _ _) (K _ _) = False
 
-cantidadDePokemonDe :: TipoDePokemon -> Entrenador -> Int
--- Devuelve la cantidad de Pokémon de determinado tipo que posee el entrenador.
--- cantidadDePokemonDe 
+
+
+-- cantidadDePokemonDe :: TipoDePokemon -> Entrenador -> Int
+-- -- Devuelve la cantidad de Pokémon de determinado tipo que posee el entrenador.
+-- cantidadDePokemonDe  t (E _ p k) = ????
+
+
+-- Dado un par de entrenadores, devuelve a sus Pokémon en una lista
+juntarPokemon :: (Entrenador, Entrenador) -> [Pokemon] 
+juntarPokemon ( (E _ q w) , (E _ a s)) = [q,w,a,s]
+-- juntarPokemon ( (E "Fede" (K Agua 10) (K Fuego 10)) , (E "Fedese" (K Planta 14) (K Fuego 4))) (Ejemplo que no se si es asi)
+
+--5-1-a
+-- Dado un elemento de algún tipo devuelve ese mismo elemento.
+loMismo :: a -> a
+loMismo x = x 
+
+--5-1-b
+-- Dado un elemento de algún tipo devuelve el número 7.
+siempreSiete :: a -> Int
+siempreSiete x = 7
+
+--5-1-c
+-- Dadas una tupla, invierte sus componentes.
+-- ¿Por qué existen dos variables de tipo diferentes?
+--Porque una sola definición opera sobre muchos tipos 
+swap :: (a, b) -> (b, a)
+swap (x, y) = (y, x)
+
+--5-2
+-- ¿Por qué estas funciones son polimórficas?
+-- Porque son funciones que se pueden usar con diferentes tipos, algo asi como genéricas.
+
+--6-2
+-- Dada una lista de elementos, si es vacía devuelve True, sino devuelve False.
+-- Definida en Haskell como null.
+
+estaVacia :: [a] -> Bool
+estaVacia [] = True
+estaVacia _ = False
+
+
+--6-3
+-- Dada una lista devuelve su primer elemento.
+elPrimero :: [a] -> a
+elPrimero (x: _) = x
+
+--6-4
+-- Dada una lista devuelve esa lista menos el primer elemento
+sinElPrimero :: [a] -> [a]
+sinElPrimero (_: xs) = xs
+
+--6-5
+-- Dada una lista devuelve un par, donde la primera componente es el primer elemento de la
+-- lista, y la segunda componente es esa lista pero sin el primero.
+splitHead :: [a] -> (a, [a])
+splitHead (x: xs) = (x, xs)
 
 
 
