@@ -105,16 +105,17 @@ implica True False = False
 implica _ _ = True
 
 --3-3-c
+-- yTambien True False
 yTambien :: Bool -> Bool -> Bool
-yTambien True True = True
-yTambien _ _ = False
+yTambien True b = b 
+
+
 
 --3-3-d
+-- oBien True False
 oBien :: Bool -> Bool -> Bool
 oBien True _ = True
-oBien _ True = True
-oBien _ _ = False
-
+oBien _ b = b    
 --4-1
 data Persona = P String Int  String
               -- Nombre Edad DNI
@@ -135,10 +136,12 @@ cambioDeNombre a (P n e d) = P a e d
 esMayorQueLaOtra :: Persona -> Persona -> Bool
 esMayorQueLaOtra (P n e d) (P m f r) = e>f
 
+
+-- laQueEsMayor (P "Fede" 30 "35760688") (P "Richard" 31 "32760688")
 laQueEsMayor :: Persona -> Persona -> Persona
-laQueEsMayor (P n e d) (P m r f) = if(e>r)
-    then P n e d
-    else P m r f
+laQueEsMayor (P n e d) (P m r f) = if e>r
+                                   then P n e d
+                                   else P m r f
 
 
 --4--2
@@ -153,18 +156,31 @@ data TipoDePokemon = Agua | Fuego | Planta
 data Entrenador = E String Pokemon Pokemon
                 --  nombre P1      P2
      deriving Show
-    
+
+
+
+-- ej: superaA (K Agua 15) (K Planta 2)
 superaA :: Pokemon -> Pokemon -> Bool
-superaA (K Agua _) (K Fuego _) = True
-superaA (K Fuego _) (K Planta _) = True
-superaA (K Planta _) (K Agua _) = True
-superaA (K _ _) (K _ _) = False
+superaA (K t1 _) (K t2 _) = esTipoMasPoderoso t1 t2
+
+
+esTipoMasPoderoso :: TipoDePokemon -> TipoDePokemon -> Bool 
+esTipoMasPoderoso Agua Fuego   = True
+esTipoMasPoderoso Fuego Planta = True  
+esTipoMasPoderoso Planta Agua  = True  
+esTipoMasPoderoso _      _     = False   
+
 
 
 
 -- cantidadDePokemonDe :: TipoDePokemon -> Entrenador -> Int
 -- -- Devuelve la cantidad de Pokémon de determinado tipo que posee el entrenador.
--- cantidadDePokemonDe  t (E _ p k) = ????
+-- cantidadDePokemonDe t (E n k1 k2) = cuantosPokemons t k1 k2 
+
+-- cuantosPokemons :: TipoDePokemon -> Pokemon -> Pokemon -> Int 
+-- cuantosPokemons t (K t1 _) (K t2 _) = if 
+
+
 
 
 -- Dado un par de entrenadores, devuelve a sus Pokémon en una lista
